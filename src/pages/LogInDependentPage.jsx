@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { login as ownerApiLogin } from "../utils/owner"
+import {login as depLoginApi} from '../utils/dependent'
 
-export default function LogInBusinessPage({ onLogIn }) {
+export default function LogInDependentPage({ onLogIn }) {
 
     const [input, setInput] = useState({})
     // const [error, setError] = useState("")
@@ -15,13 +15,13 @@ export default function LogInBusinessPage({ onLogIn }) {
         evt.preventDefault()
         console.log(input)
         if (input.email && input.password){
-            ownerApiLogin(input)
+            depLoginApi(input)
                 .then(token => {
                     console.log(token)
                     localStorage.setItem("token", token)
                     onLogIn(input)
                 }).catch(err => console.log(err))
-            navigate('/owner')  
+            navigate('/profile')  
         } 
         // else {
             

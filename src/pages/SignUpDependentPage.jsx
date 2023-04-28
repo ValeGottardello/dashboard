@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import {signup as signApiOwner } from '../utils/owner'
-import {login as loginApiOwner } from '../utils/owner'
+import {signup as signApiDep } from '../utils/dependent'
+import {login as loginApiDep } from '../utils/dependent'
 
-export default function SignUpBusinessPage () {
+export default function SignUpDependentPage () {
 
     const [input, setInput] = useState({})
     const navigate = useNavigate()
@@ -15,13 +15,13 @@ export default function SignUpBusinessPage () {
         evt.preventDefault()
         try {
             if (input.email && input.password && input.name){
-                const newOwner = await signApiOwner(input)
+                const newDependent = await signApiDep(input)
                     .then(dbRes => dbRes)
                 
-                await loginApiOwner({ email : newOwner.owner_email, password: input.password}).then(token => {
+                await loginApiDep({ email : newDependent.email, password: input.password}).then(token => {
                     console.log(token)
                     localStorage.setItem("token", token)
-              
+             
                 })
                 navigate('/profile')  
             }
@@ -33,9 +33,9 @@ export default function SignUpBusinessPage () {
     return (
         <div>
             <form onChange={handleChange} onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Business Name"/>
-                <input type="text" name="email" placeholder="Business Email"/>
-                <input type="password" name="password" placeholder="password"/>
+                <input type="text" name="name" placeholder="Name"/>
+                <input type="text" name="email" placeholder="Email"/>
+                <input type="password" name="password" placeholder="Password"/>
                 <button>Sign up</button>
             </form>
         </div>

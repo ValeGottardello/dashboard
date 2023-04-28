@@ -7,7 +7,7 @@ export default function NavBar ({user, onLogOut}) {
         <header>
             { user && (
                 <>
-                    <Link to="/profile">Hello {user.name}</Link>
+                    <Link to="/profile">Hello {user.email}</Link>
                     <button onClick={e => onLogOut()}>Log Out</button>
                 </>
             )}
