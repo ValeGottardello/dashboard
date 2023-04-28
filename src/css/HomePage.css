@@ -1,0 +1,26 @@
+.homepage-wrapper{
+    padding: 10% 5%;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+@media only screen and (max-width: 600px)  {
+    .homepage-wrapper{
+        grid-template-columns: 1fr;
+    }
+}
+
+.slides{
+ border-radius: 5px;
+}
+.home-btn{
+    text-decoration: none;
+    color: white;
+    width: fit-content;
+    margin: 0 10px;
+}
+
+.left-sect button {
+  margin: 0 20px;
+}

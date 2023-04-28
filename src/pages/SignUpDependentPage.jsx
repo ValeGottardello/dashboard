@@ -1,71 +1,76 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { login as ownerApiLogin } from "../utils/owner"
+import {signup as signApiDep } from '../utils/dependent'
+import {login as loginApiDep } from '../utils/dependent'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from "react-router-dom";
 import Carousel from '../components/Carousel'
-export default function LogInBusinessPage({ onLogIn }) {
+import { Link } from "react-router-dom";
+
+export default function SignUpDependentPage () {
 
     const [input, setInput] = useState({})
-    const [error, setError] = useState("") //for now hard coding then add function to check requirements for password
     const navigate = useNavigate()
-    const handleChange = ({ target }) => {
-        setInput({ ...input, [ target.name ] : target.value})
+    const handleChange = ({target}) => {
+        setInput({...input, [target.name] : target.value })
     }
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault()
-        console.log(input)
-        if (input.email && input.password){
-            ownerApiLogin(input)
-                .then(token => {
+        try {
+            if (input.email && input.password && input.name){
+                const newDependent = await signApiDep(input)
+                    .then(dbRes => dbRes)
+                
+                await loginApiDep({ email : newDependent.email, password: input.password}).then(token => {
                     console.log(token)
                     localStorage.setItem("token", token)
-                    onLogIn(input)
-                }).catch(err => console.log(err))
-            navigate('/profile')  
-        } 
-        else {
-            setError("You need enter a valid email and password")
+             
+                })
+                navigate('/profile')  
+            }
+        } catch (err) {
+            console.log(err)
         }
     }
 
     return (
         <div className="wrapper-from">
-             <div className="left">
+            <div className="left">
                 <Form  onChange={handleChange} onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                        <Form.Label>Your name</Form.Label>
+                        <Form.Control type="name" placeholder="Enter your name" name="name" />
+                    </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Business email address</Form.Label>
+                        <Form.Label>Your email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" name="email" />
                         <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                         </Form.Text>
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" />
                     </Form.Group>
-                    {error && (
+                    {/* {error && (
                         <Form.Text className="text-muted">
                             {error}
                         </Form.Text>
-                    )}
+                    )} */}
                     <Button variant="primary" type="submit">
-                        Submit
+                        Sign Up
                     </Button>
                 </Form>
-             </div>
-             <div className="right">
+            </div>
+            <div className="right">
                 <div className="wrapper-carousel">
                     <Carousel/>
                 </div>
                 <Button variant="primary">
-                    <Link className="sign-btn" to="/signup/owner">Create a business account</Link>
-                </Button>
-        </div>
-        </div>
+                    <Link className="sign-btn" to="/login/dependent">Log In</Link>
+                 </Button>
+            </div>
+      </div>
     )
 }
-
