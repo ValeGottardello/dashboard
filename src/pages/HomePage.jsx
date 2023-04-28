@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom"
-
+import "../css/HomePage.css"
+import { Button } from "react-bootstrap"
+import Carousel from '../components/Carousel'
 export default function HomePage () {
     return (
-        <>
-            <div>Home Page</div>
-            <Link to="/login/owner">
-                <button>Log as a business</button>
-            </Link>
-            <Link to="/signup/owner">
-                <button>Create an account for your business</button>
-            </Link>
-            <Link to="/login/dependent">
-                <button>Log as a dependent</button>
-            </Link>
-            <Link to="/signup/dependent">
-                <button>Create your account (dependent)</button>
-            </Link>
-        </>
+        <main className="homepage-wrapper">
+            <div className="left-sect">
+                {/* more content h1, and description of for whats the app */}
+                <Button variant="primary">
+                    <Link className="home-btn" to="/signup/owner">Sign your business up</Link>
+                </Button>
+                <Button variant="primary">
+                    <Link className="home-btn" to="/login/owner">Log as a business</Link>
+                </Button>
+            </div>
+            <div className="right-sect">
+                <Carousel/>
+            </div>
+        </main>
     )
 }
