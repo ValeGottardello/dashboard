@@ -7,11 +7,13 @@ import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import '../css/LogInPage.css'
 import Carousel from '../components/Carousel'
+import { getUser } from "../utils/users_service";
 
-export default function SignUpBusinessPage () {
+export default function SignUpBusinessPage ({ onLogIn }) {
 
     const [input, setInput] = useState({})
     const navigate = useNavigate()
+    const [error, setError] = useState({})
     const handleChange = ({target}) => {
         setInput({...input, [target.name] : target.value })
     }
@@ -24,26 +26,18 @@ export default function SignUpBusinessPage () {
                     .then(dbRes => dbRes)
                 
                 await loginApiOwner({ email : newOwner.owner_email, password: input.password}).then(token => {
-                    console.log(token)
+                    onLogIn(getUser())
                     localStorage.setItem("token", token)
               
                 })
                 navigate('/profile')  
             }
         } catch (err) {
-            console.log(err)
+            setError(err)
         }
     }
 
     return (
-        // <div>
-        //     <form onChange={handleChange} onSubmit={handleSubmit}>
-        //         <input type="text" name="name" placeholder="Business Name"/>
-        //         <input type="text" name="email" placeholder="Business Email"/>
-        //         <input type="password" name="password" placeholder="password"/>
-        //         <button>Sign up</button>
-        //     </form>
-        // </div>
         <div className="wrapper-from">
         <div className="left">
             <Form  onChange={handleChange} onSubmit={handleSubmit}>
@@ -62,11 +56,11 @@ export default function SignUpBusinessPage () {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="Password" />
                 </Form.Group>
-                {/* {error && (
+                {error?.message  && (
                     <Form.Text className="text-muted">
-                        {error}
+                        {error.message}
                     </Form.Text>
-                )} */}
+                )}
                 <Button variant="primary" type="submit">
                     Sign Up
                 </Button>
