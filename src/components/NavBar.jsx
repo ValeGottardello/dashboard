@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export default function NavBar ({user, onLogOut}) {
-    
+    console.log(user)
+    const navigate = useNavigate()
     return ( 
         <header>
         {[false].map((expand) => (
@@ -21,16 +22,19 @@ export default function NavBar ({user, onLogOut}) {
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end">
-            { user ? (
+            { user !== null ? (
                 <>
                     <Offcanvas.Header closeButton>
-                        <Link to="/profile">Hello {user.email}</Link>
+                        <Link to="/profile">Hello {user.email ? user.email : user.owner_email}</Link>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Nav.Link><Link to="/"> Home </Link></Nav.Link>
+                            <Link to="/"> Home </Link>
                             <Nav.Link>
-                                <button onClick={e => onLogOut()}>Log Out</button>
+                                <button onClick={e => {
+                                    onLogOut()
+                                    navigate('/')
+                                    }}>Log Out</button>
                             </Nav.Link>
                         </Nav>
                     </Offcanvas.Body>   
@@ -42,16 +46,10 @@ export default function NavBar ({user, onLogOut}) {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Nav.Link>
-                                    <Link to="/"> Home </Link>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <Link to="/login/dependent">Log In</Link>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <Link to="/signup/dependent">Sign Up</Link>
-                                </Nav.Link>
-                            </Nav>
+                            <Link to="/"> Home </Link>
+                            <Link to="/login/dependent">Log In </Link>                           
+                            <Link to="/signup/dependent">Sign Up</Link>                       
+                        </Nav>
                     </Offcanvas.Body>   
                 </>
             )}

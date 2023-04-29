@@ -1,15 +1,32 @@
-export default function ProfilePage(user) {
+import { useEffect } from "react"
+import Business from "../components/Business"
+import Dependent from "../components/Dependet"
+import { getUser } from "../utils/users_service"
 
-    console.log(user)
+
+export default function ProfilePage({ user , onLogIn }) {
+    
+    useEffect(() => {
+        onLogIn(getUser())  
+    }, [])
+
     return(
         <>
-        { user && 
-            <div>
-                profile page
-            {/* //if user is owner render owner component
-            //if user is manager render manager component
-            //if user is employee render employee component */}
-            </div>
+        { user !== null && 
+            <>
+                { user.owner_email ? (
+
+                    <Business user={user} key={user.id}/>
+
+                ) : null }
+
+                { user.email ? (
+                    
+                    <Dependent user={user} key={user.id}/>
+
+                ) : null }
+            
+            </>        
         }
         </>
     )

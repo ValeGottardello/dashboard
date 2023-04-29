@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import Carousel from '../components/Carousel'
+import { getUser } from "../utils/users_service";
+
 export default function LogInBusinessPage({ onLogIn }) {
 
     const [input, setInput] = useState({})
-    const [error, setError] = useState("") //for now hard coding then add function to check requirements for password
+    const [error, setError] = useState({}) //for now hard coding then add function to check requirements for password
     const navigate = useNavigate()
     const handleChange = ({ target }) => {
         setInput({ ...input, [ target.name ] : target.value})
@@ -16,18 +18,19 @@ export default function LogInBusinessPage({ onLogIn }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        console.log(input)
+  
         if (input.email && input.password){
             ownerApiLogin(input)
                 .then(token => {
-                    console.log(token)
+
+                    onLogIn(getUser())
                     localStorage.setItem("token", token)
-                    onLogIn(input)
-                }).catch(err => console.log(err))
-            navigate('/profile')  
-        } 
-        else {
-            setError("You need enter a valid email and password")
+                    navigate('/profile')  
+                    
+                }).catch((err) => { 
+                    setError(err)
+                    navigate('/login/owner')
+                })
         }
     }
 
@@ -47,9 +50,9 @@ export default function LogInBusinessPage({ onLogIn }) {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" />
                     </Form.Group>
-                    {error && (
+                    {error?.message && (
                         <Form.Text className="text-muted">
-                            {error}
+                            {error.message}
                         </Form.Text>
                     )}
                     <Button variant="primary" type="submit">

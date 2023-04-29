@@ -28,11 +28,12 @@ function App() {
       <NavBar user={user} onLogOut={logout}/>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/signup/owner" element={<SignUpBusinessPage user={user}/>}/>
-        <Route path="/signup/dependent" element={<SignUpDependentPage user={user}/>}/>
+        <Route path="/signup/owner" element={<SignUpBusinessPage onLogIn={login} />}/>
+        <Route path="/signup/dependent" element={<SignUpDependentPage onLogIn={login} />}/>
         <Route path="/login/owner" element={<LogInBusinessPage onLogIn={login} />}/>
         <Route path="/login/dependent" element={<LogInDependentPage onLogIn={login} />}/>
-        <Route path="/profile" element={<ProfilePage user={user}/>}/>
+        <Route path="/profile" element={<ProfilePage user={user} onLogIn={login}/>}/>
+        <Route path="/roster"/>
 
         {/* <Route/> */}
         {/* <Route/> */}

@@ -6,10 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Carousel from '../components/Carousel'
 import { Link } from "react-router-dom";
+import { getUser } from "../utils/users_service";
 
-export default function SignUpDependentPage () {
+export default function SignUpDependentPage ({onLogIn}) {
 
     const [input, setInput] = useState({})
+    const [error, setError] = useState({})
     const navigate = useNavigate()
     const handleChange = ({target}) => {
         setInput({...input, [target.name] : target.value })
@@ -23,14 +25,14 @@ export default function SignUpDependentPage () {
                     .then(dbRes => dbRes)
                 
                 await loginApiDep({ email : newDependent.email, password: input.password}).then(token => {
-                    console.log(token)
+                    onLogIn(getUser)
                     localStorage.setItem("token", token)
              
                 })
                 navigate('/profile')  
             }
         } catch (err) {
-            console.log(err)
+            setError(err)
         }
     }
 
@@ -53,11 +55,11 @@ export default function SignUpDependentPage () {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" />
                     </Form.Group>
-                    {/* {error && (
+                    {error?.message && (
                         <Form.Text className="text-muted">
-                            {error}
+                            {error.message}
                         </Form.Text>
-                    )} */}
+                    )}
                     <Button variant="primary" type="submit">
                         Sign Up
                     </Button>
