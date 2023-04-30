@@ -1,0 +1,11 @@
+@import url(Variables.css);
+.navbar-wrapper{
+    margin:10px 30px;
+    color: white;
+}
+.navbar-brand a {
+    text-decoration: none;
+    color: white;
+    font-family: var(--font-titles);
+    font-size: var(--font-size-titles);
+}

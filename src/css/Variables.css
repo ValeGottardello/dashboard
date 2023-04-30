@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@300&display=swap');
+
+:root {
+    --font-text: 'Montserrat', sans-serif;
+    --font-titles: 'Abril Fatface', cursive;
+    --font-size-titles: 2rem;
+    --font-size-subtitles: 1.6rem;
+    --font-size-text: 1rem;
+    --color-primary: #1D101C;
+    --color-secondary: #F2A09F;
+    --color-tertiary: #733B3D;
+    --color-quartiary: #312E56;
+    --color-last: #4e4d55;
+    --border: 2px solid #1D101C;
+}
+
+/* body {
+  color: var(--color-primario);
+}
+  h1, h2, h3 {
+    font-family: var(--fuente-titulos);
+  }
+  
+  p, span {
+    font-family: var(--fuente-texto);
+  } */

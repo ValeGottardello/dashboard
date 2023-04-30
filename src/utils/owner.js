@@ -31,3 +31,11 @@ console.log(memberDelete)
               .then(res => res.data)
 }
 
+export function updateDependent (data) {
+  console.log(data)
+    return axios.put(`${process.env.REACT_APP_PORT}/owner/update/dependent`, data)
+                .then(res => res.data)
+  }
+
+
+ 

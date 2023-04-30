@@ -19,7 +19,17 @@ export function addHours(data) {
 }
 
 export function getTasks (id) {
-  return axios.get(`${process.env.REACT_APP_PORT}/tasks?id=${id}`).then(res => res.data)
+  return axios.get(`${process.env.REACT_APP_PORT}/tasks/list?id=${id}`).then(res => res.data)
 }
 
+export function checkDone (id) {
+  return axios.put(`${process.env.REACT_APP_PORT}/tasks/done?id=${id}`).then(res => res.data)
+}
 
+export function addNewTask (data) {
+  console.log(data)
+  return axios.post(`${process.env.REACT_APP_PORT}/tasks/new`, data, 
+  {headers: {
+      "Content-Type": "application/json",
+    }}).then(res => res.data)
+}

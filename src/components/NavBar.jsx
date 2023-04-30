@@ -3,14 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import '../css/NavBar.css'
 
 export default function NavBar ({user, onLogOut}) {
-    console.log(user)
     const navigate = useNavigate()
     return ( 
-        <header>
+        <header className="navbar-wrapper">
         {[false].map((expand) => (
-        <Navbar key={expand} bg="light" expand={false} className="mb-3">
+        <Navbar key={expand} expand={false} className="mb-3">
           <Container fluid>
             <Navbar.Brand> 
                 <Link to="/">

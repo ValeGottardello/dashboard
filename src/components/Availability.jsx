@@ -3,6 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { addHours } from '../utils/dependent';
+import '../css/Profile.css'
 
 export function Availability ({user}) {
     

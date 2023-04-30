@@ -1,0 +1,36 @@
+@import url('Variables.css');
+
+.wrapper-profile{
+    margin: 10px auto;
+    width: 80%;
+
+}
+
+.wrapper-profile header section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 50px 0;
+    padding: 20px;
+  
+}
+
+.wrapper-profile header section div h2{
+    font-family: var(--font-titles);
+    font-size: var(--font-size-subtitles);
+    color: var(--color-quartiary);
+} 
+.wrapper-profile header section div h4 {
+    font-family: var(--font-text);
+    font-size: var(--font-size-text);
+    color: var(--color-quartiary);
+    font-weight: 900;
+
+}
+
+.profile-pic{
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}   

@@ -5,37 +5,27 @@ import Accordion from 'react-bootstrap/Accordion';
 import Timer from './Timer';
 import {Availability} from './Availability';
 import {Tasks} from './Task';
+import Details from './Details';
+import Manager from './Manager';
+import '../css/Profile.css'
 
 export default function Dependent (user) {
     
     return (
-        <div>
+        <div className='wrapper-profile'>
             <header>
-                <img src="" alt="" />
-                <div>
-                    {/* info */}
-                    <div>
-                        {/* name */}
-                        {/* role */}
-                    </div>
-                    <div>
-                        {/* email */}
-                        {/* hours */}
-                    </div>
-                </div>
-                <div>
-                    {/* <Button variant="secondary" size="sm" active>
-                        EDIT PHOTO
-                    </Button> */}
-                </div>
+                <Details user={user}/>
             </header>
-            <div>
+            <section>
                 <Accordion defaultActiveKey={['0']}>
                     <Timer/>
                     <Availability user={user}/>
                     <Tasks user={user}/>
+                    { user.user.position === "manager" ? (
+                    <Manager user={user}/>
+                    ): null}
                 </Accordion>
-            </div>
+            </section>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import { Link } from "react-router-dom";
 // import moment from 'moment';
-
+import '../css/Profile.css'
 export default function Timer () {
     const [intervalId, setIntervalId] = useState(null)
     const [seconds, setSeconds] = useState(0)
