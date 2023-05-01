@@ -1,4 +1,5 @@
-import './App.css';
+import './App.css'
+import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import LogInBusinessPage from './pages/LogInBusinessPage';
@@ -38,7 +39,7 @@ function App() {
         {/* <Route/> */}
         {/* <Route/> */}
       </Routes>
-      
+      <Footer/>
     </div>
   );
 }

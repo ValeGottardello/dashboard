@@ -33,3 +33,10 @@ export function addNewTask (data) {
       "Content-Type": "application/json",
     }}).then(res => res.data)
 }
+export function deleteTask (id) {
+
+  return axios.delete(`${process.env.REACT_APP_PORT}/tasks/delete?id=${id}`).then(res => res.data)
+}
+export function getAllTasks (id) {
+  return axios.get(`${process.env.REACT_APP_PORT}/tasks/all?id=${id}`).then(res => res.data)
+}

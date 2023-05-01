@@ -12,10 +12,11 @@ export default function NavBar ({user, onLogOut}) {
         {[false].map((expand) => (
         <Navbar key={expand} expand={false} className="mb-3">
           <Container fluid>
-            <Navbar.Brand> 
-                <Link to="/">
-                AppName or Logo
-                </Link>
+            <Navbar.Brand className="logo-wrapper">   
+                    <Link to="/" className="img-wrapper">
+                        <img className="img" src="/logoapp.png" alt="" />
+                        <h4>Appname</h4>
+                    </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
@@ -25,11 +26,12 @@ export default function NavBar ({user, onLogOut}) {
             { user !== null ? (
                 <>
                     <Offcanvas.Header closeButton>
-                        <Link to="/profile">Hello {user.email ? user.email : user.owner_email}</Link>
+                        <Link
+                        to="/profile">Hello {user.email ? user.email : user.owner_email}</Link>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Link to="/"> Home </Link>
+                            <Link to="/" className="home-link"> Home </Link>
                             <Nav.Link>
                                 <button onClick={e => {
                                     onLogOut()
@@ -42,7 +44,7 @@ export default function NavBar ({user, onLogOut}) {
             ) : (
                 <>
                     <Offcanvas.Header closeButton >
-                        <h3>Are you part of the team?</h3>
+                        <h4>dependent account</h4>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">

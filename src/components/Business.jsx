@@ -84,28 +84,30 @@ export default function Business ({ user }) {
 
     return (
         <div className='wrapper-profile'>
-            <section>
+            <header>
                 <DetailsBusiness user={user}/>
-            </section>
+            </header>
             <section>
                 <h3>Team members</h3>
-                {dependents?.map(eachDep => (                 
-                     <Card style={{ width: '18rem' }} key={eachDep.id}>
-                        <Card.Body>
-                            <Card.Title><h3>{eachDep.name}</h3></Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{eachDep.position}</Card.Subtitle>
-                            <ul>
-                                    <li>{eachDep.email}</li>
-                                    <li>{eachDep.hours_available !== null ? eachDep.hours_available + "h" : "Not determined yet"}</li>
-                            </ul>
-                        </Card.Body>
-                    </Card>
-                ))}
+                <div className="card-members-wrapper">
+                    {dependents?.map(eachDep => (                 
+                        <Card style={{ width: '18rem' }} key={eachDep.id}>
+                            <Card.Body>
+                                <Card.Title><h3 >{eachDep.name}</h3></Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">{eachDep.position}</Card.Subtitle>
+                                <ul>
+                                        <li>{eachDep.email}</li>
+                                        <li>{eachDep.hours_available !== null ? + eachDep.hours_available + "h available" : "No specified hours"}</li>
+                                </ul>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </div>
             </section>
             <section>
                 <Accordion defaultActiveKey={['0']}>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header><h3>Add new a team member</h3></Accordion.Header>
+                        <Accordion.Header><h3 className="header-acordion">Add new a team member</h3></Accordion.Header>
                         <Accordion.Body>
                         <Form onChange={handleChangeAdd} onSubmit={handleSubmitAdd}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -130,7 +132,7 @@ export default function Business ({ user }) {
             <section>
             <Accordion defaultActiveKey={['0']}>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header><h3>Delete a team member</h3></Accordion.Header>
+                        <Accordion.Header><h3 className="header-acordion">Delete a team member</h3></Accordion.Header>
                         <Accordion.Body>
                         <Form onChange={handleChangeDelete} onSubmit={handleSubmitDelete}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -152,7 +154,7 @@ export default function Business ({ user }) {
             <section>
                 <Accordion defaultActiveKey={['0']}>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header><h3>Update a role of a team member</h3></Accordion.Header>
+                        <Accordion.Header><h3 className="header-acordion">Update a role of a team member</h3></Accordion.Header>
                         <Accordion.Body>
                         <Form onChange={handleChangeUpdate} onSubmit={handleSubmitUpdate}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -175,7 +177,7 @@ export default function Business ({ user }) {
                 </Accordion>
                 {message && show ? (
                 <>
-                <Alert show={show} variant="success">
+                <Alert show={show}>
                     <Alert.Heading>{message}</Alert.Heading>
                     <div className="d-flex justify-content-end">
                     <Button onClick={() => setShow(false)} variant="outline-success">

@@ -12,20 +12,17 @@ export default function ProfilePage({ user , onLogIn }) {
 
     return(
         <>
-        { user !== null && 
+        { user && 
             <>
-                { user.owner_email ? (
-
+                { user.email ? (
+                     
+                     <Dependent user={user} key={user.id}/>
+                     
+                ) : (
+         
                     <Business user={user} key={user.id}/>
 
-                ) : null }
-
-                { user.email ? (
-                    
-                    <Dependent user={user} key={user.id}/>
-
-                ) : null }
-            
+                )}
             </>        
         }
         </>

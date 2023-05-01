@@ -1,4 +1,7 @@
 @import url('./css/Variables.css');
 body {
-    background-color: var(--color-primary);
+    background-color: var(--color-tertiary);
+}
+*{
+    font-family: var(--font-text);
 }

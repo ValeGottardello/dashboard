@@ -39,6 +39,7 @@ export default function SignUpDependentPage ({onLogIn}) {
     return (
         <div className="wrapper-from">
             <div className="left">
+                <h3>ARE YOU A TEAM MEMBER?</h3>
                 <Form  onChange={handleChange} onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Your name</Form.Label>

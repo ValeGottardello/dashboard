@@ -1,7 +1,6 @@
 .wrapper-from{
     padding: 5% 5%;
     width: 100vw;
-    height: 60vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }

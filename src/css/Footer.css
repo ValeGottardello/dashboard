@@ -1,0 +1,35 @@
+@import url("Variables.css");
+
+
+.img h4{
+    left: 290px;
+    color: var(--space-cadet);
+    font-family: var(--font-titles);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+ .info{
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info ul{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+    margin-top: 30px;
+    border-top: 2px solid var(--space-cadet);
+    width: 50%;
+}
+.info ul li {
+    text-decoration: none;
+    list-style: none;
+}
+.info ul li a {
+    color: var(--danger)
+}

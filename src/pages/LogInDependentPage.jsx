@@ -36,8 +36,8 @@ export default function LogInDependentPage({ onLogIn }) {
 
     return (
         <div className="wrapper-from">
-           
         <div className="left">
+        <h3>LOG IN AS A TEAM MEMBER?</h3>
             <Form  onChange={handleChange} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Your email address</Form.Label>

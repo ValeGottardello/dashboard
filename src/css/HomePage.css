@@ -1,13 +1,14 @@
 .homepage-wrapper{
-    padding: 10% 5%;
+    padding: 2% 3%;
     width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
-@media only screen and (max-width: 600px)  {
+@media only screen and (max-width: 768px)  {
     .homepage-wrapper{
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
@@ -21,6 +22,60 @@
     margin: 0 10px;
 }
 
-.left-sect button {
-  margin: 0 20px;
+.right-sect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.left-sect{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.home-info h1{
+    font-size: 3rem;
+    margin: 20px 0;
+    font-family: var(--font-titles);
+}
+.home-info p{
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+.home-info span{
+    font-size: 0.9rem;
+    margin: 20px 0;
+}
+button ,.btn.active, .btn-primary {
+    /* color: var(--salmon-pink); */
+    color: white;
+    font-family: var(--font-text);
+    border: 1px solid #4e4d55;
+    background-color: var(--delft-blue);
+    border-radius: 5px;
+}
+.btn-primary:hover{
+    background-color: var(--lilac);
+    border:1px solid white;
+}
+.btn-primary a:hover{
+    color: white;
+}
+.btn-primary:active{
+    background-color: var(--danger);
+}
+.btn-home{
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 40px;
+}
+.btn-home button a{
+    font-size: 1rem;
+}
+.btn-home button{
+    padding: 6px 6px;
 }

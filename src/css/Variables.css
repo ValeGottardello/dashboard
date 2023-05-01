@@ -1,17 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@500&display=swap');
 
 :root {
+
+/* 
+  --titles: 
+  color:var(--space-cadet);
+  font-family: var(--titles);
+  font-size: var(--font-size-text);
+
+  --buttons:
+  background-color: var(--delft-blue);
+  color: var(--salmon-pink);
+  font-family: var(--font-text);
+  border: 1px solid #4e4d55; */
+
     --font-text: 'Montserrat', sans-serif;
     --font-titles: 'Abril Fatface', cursive;
     --font-size-titles: 2rem;
     --font-size-subtitles: 1.6rem;
     --font-size-text: 1rem;
-    --color-primary: #1D101C;
-    --color-secondary: #F2A09F;
-    --color-tertiary: #733B3D;
-    --color-quartiary: #312E56;
+    --salmon-pink: #F2A09Fff;
+    --space-cadet: #141633ff;
+    --lilac: #BE8FB8ff;
+    --danger: rgb(112, 61, 195);
+    --space-cadet-2: #1E2044ff;
+    --delft-blue: #383D73ff;
     --color-last: #4e4d55;
-    --border: 2px solid #1D101C;
+    --border: 2px solid #1D101C; 
 }
 
 /* body {

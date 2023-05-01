@@ -37,6 +37,7 @@ export default function LogInBusinessPage({ onLogIn }) {
     return (
         <div className="wrapper-from">
              <div className="left">
+             <h3>LOG YOUR BUSINESS</h3>
                 <Form  onChange={handleChange} onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Business email address</Form.Label>

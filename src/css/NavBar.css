@@ -1,11 +1,71 @@
 @import url(Variables.css);
 .navbar-wrapper{
-    margin:10px 30px;
     color: white;
+    background-color: white;
+}
+
+.navbar-toggler {
+    background-color: var(--delft-blue);
+    color: white;
+}
+.logo-wrapper .img-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-brand a h4{
+    text-decoration: none;
+    color: var(--space-cadet);
+    font-family: var(--font-titles);
+    text-transform: uppercase;
 }
 .navbar-brand a {
     text-decoration: none;
-    color: white;
-    font-family: var(--font-titles);
-    font-size: var(--font-size-titles);
 }
+.img{
+    width: 150px;
+    height: 150px;
+    transition: transform 0.5s ease;
+    margin-top: 25px;
+
+}
+.navbar>.container-fluid{
+height: 130px;
+}
+.offcanvas-header a, .offcanvas-header h4{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-family: var(--font-titles);
+}
+.offcanvas{
+    background-color: rgba(30, 32, 68, 0.667);
+}
+.navbar-nav a{
+    text-decoration: none;
+    color: white;
+    padding-left: 2px;
+    margin :5px 0; 
+}
+.container-fluid{
+    align-content: center;
+}
+
+
+.img {
+    transition: transform 0.5s ease;
+}
+  
+.img:hover {
+    animation: rotate 1s ease-in-out;
+}
+  
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  

@@ -6,13 +6,21 @@ export default function HomePage () {
     return (
         <main className="homepage-wrapper">
             <div className="left-sect">
-                {/* more content h1, and description of for whats the app */}
-                <Button variant="primary">
-                    <Link className="home-btn" to="/signup/owner">Sign your business up</Link>
-                </Button>
-                <Button variant="primary">
-                    <Link className="home-btn" to="/login/owner">Log as a business</Link>
-                </Button>
+                <article className="home-info">
+                    <h1>
+                    Power your business with AppName
+                    </h1>
+                    <p>Do you have a business and would you like to organize your staff? </p>
+                    <span>Create an account so you can add team members, assign them tasks, and organize your business schedules</span>
+                </article>
+                <div className="btn-home">
+                    <Button variant="primary">
+                        <Link className="home-btn" to="/signup/owner">Sign up</Link>
+                    </Button>
+                    <Button variant="primary">
+                        <Link className="home-btn" to="/login/owner">Log in</Link>
+                    </Button>
+                </div>
             </div>
             <div className="right-sect">
                 <Carousel/>

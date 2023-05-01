@@ -40,6 +40,7 @@ export default function SignUpBusinessPage ({ onLogIn }) {
     return (
         <div className="wrapper-from">
         <div className="left">
+            <h3>DO YOU HAVE A BUSINESS?</h3>
             <Form  onChange={handleChange} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Business's Name</Form.Label>
@@ -77,3 +78,31 @@ export default function SignUpBusinessPage ({ onLogIn }) {
   </div>
     )
 }
+
+
+// const [password, setPassword] = useState("") 
+// const [isText, setIsText] = useState(false)
+
+// const handleChange = (evt) => {
+//     setPassword()
+
+//     if (evt.target.value.length < 6){
+//         setPassword({password: evt.target.value, status: "weak"})
+//     } else if (evt.target.value.length >= 6 && evt.target.value.length <= 12 ){
+//         setPassword({password: evt.target.value, status: "medium"})
+//     } else if (evt.target.value.length >= 13){
+//         setPassword({password: evt.target.value, status: "strong"})
+//     } else {
+//         setPassword({password: evt.target.value, status: ""})
+//     }
+// } 
+// const isChecked = () => setIsText(!isText)
+
+// return (
+//     <div className="wrapper">
+//         <p className="title">Enter your new password</p>
+//         <input type={ isText === true ? 'text' : 'password'} onChange={handleChange} className="input-box"/>
+//         <input type="checkbox" className="check-box" onClick={isChecked}/>
+//         <p className="info">{password.length !== 0 ? password.status : ""}</p>
+//     </div>
+// )
