@@ -15,7 +15,7 @@ export default function NavBar ({user, onLogOut}) {
             <Navbar.Brand className="logo-wrapper">   
                     <Link to="/" className="img-wrapper">
                         <img className="img" src="/logoapp.png" alt="" />
-                        <h4>Appname</h4>
+        
                     </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />

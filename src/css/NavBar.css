@@ -13,12 +13,7 @@
     align-items: center;
     justify-content: center;
 }
-.navbar-brand a h4{
-    text-decoration: none;
-    color: var(--space-cadet);
-    font-family: var(--font-titles);
-    text-transform: uppercase;
-}
+
 .navbar-brand a {
     text-decoration: none;
 }

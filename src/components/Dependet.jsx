@@ -10,7 +10,7 @@ import { getBusinessName, deleteDependent } from '../utils/owner';
 import { getPayload } from '../utils/users_service';
 import { AiOutlineUser } from "react-icons/ai";
 
-export default function Dependent ({user, onSetUser, onLogIn}) {
+export default function Dependent ({user, onSetUser}) {
 
     const [intervalId, setIntervalId] = useState(null)
     const [seconds, setSeconds] = useState(0)

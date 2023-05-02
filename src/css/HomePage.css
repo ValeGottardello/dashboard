@@ -11,6 +11,11 @@
         gap: 20px;
     }
 }
+.home-info .app-name{
+    color: #BE8FB8ff;
+    font-family: var(--font-titles);
+    font-size: 4rem;
+}
 
 .slides{
  border-radius: 5px;

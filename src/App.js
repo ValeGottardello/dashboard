@@ -14,7 +14,7 @@ import NavBar from './components/NavBar'
 function App() {
 
   const [user, setUser] = useState(getUser())
- 
+
 
   const login = data => {
     console.log(data)

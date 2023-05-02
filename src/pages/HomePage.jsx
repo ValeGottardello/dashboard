@@ -8,7 +8,8 @@ export default function HomePage () {
             <div className="left-sect">
                 <article className="home-info">
                     <h1>
-                    Power your business with AppName
+                    Power your business with <span className="app-name">
+                    FIXUP</span>
                     </h1>
                     <p>Do you have a business and would you like to organize your staff? </p>
                     <span>Create an account so you can add team members, assign them tasks, and organize your business schedules</span>

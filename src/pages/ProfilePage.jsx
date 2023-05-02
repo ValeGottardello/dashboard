@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect} from "react"
 import Business from "../components/Business"
 import Dependent from "../components/Dependet"
 // import { login } from "../utils/dependent"
@@ -10,14 +10,14 @@ export default function ProfilePage({ user , onLogIn, onSetUser }) {
     useEffect(() => {
         onLogIn(getUser())  
     }, [])
-
+ 
     return(
         <>
         { user && 
             <>
                 { user.email && (
                      
-                     <Dependent user={user} key={user.id} onSetUser={onSetUser} onLogIn={onLogIn}/>
+                     <Dependent user={user} key={user.id} onSetUser={onSetUser} />
                      
                 )}  
                 {user.owner_email && (
