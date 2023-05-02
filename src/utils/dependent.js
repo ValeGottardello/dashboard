@@ -6,7 +6,7 @@ export async function login(data) {
 }
 
 export async function signup(input) {
-  console.log((input))
+  // console.log((input))
   return axios.post(`${process.env.REACT_APP_PORT}/dependent/signup`, input, {
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export async function signup(input) {
   }).then(res => res.data)}
 
 export function addHours(data) {
-  console.log(data)
+ 
   return axios.put(`${process.env.REACT_APP_PORT}/dependent/addhours`, data).then(res => res.data)
 }
 
@@ -27,14 +27,13 @@ export function checkDone (id) {
 }
 
 export function addNewTask (data) {
-  console.log(data)
+  // console.log(data)
   return axios.post(`${process.env.REACT_APP_PORT}/tasks/new`, data, 
   {headers: {
       "Content-Type": "application/json",
     }}).then(res => res.data)
 }
 export function deleteTask (id) {
-
   return axios.delete(`${process.env.REACT_APP_PORT}/tasks/delete?id=${id}`).then(res => res.data)
 }
 export function getAllTasks (id) {

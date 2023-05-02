@@ -6,15 +6,54 @@ import '../css/Profile.css'
 import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import '../css/Profile.css'
+import { getBusinessName, deleteDependent } from '../utils/owner';
+import { getPayload } from '../utils/users_service';
+import { AiOutlineUser } from "react-icons/ai";
 
-export default function Dependent (user) {
+export default function Dependent ({user, onSetUser, onLogIn}) {
+
     const [intervalId, setIntervalId] = useState(null)
     const [seconds, setSeconds] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [hours, setHours] = useState(0)
     const [disabled, setDisabled] = useState(false)
     const [input, setInput] = useState({})
-    const [updateHours, setUpdateHours] = useState({})
+    const [businessName, setBusinessName] = useState({})
+
+
+    useEffect(() => {
+        if (seconds === 60) {
+            
+            setSeconds((prevSeconds) => prevSeconds % 60)
+            setMinutes(minutes + 1)
+            
+        }
+        if(minutes === 60 ){
+            
+            setMinutes((prevSeconds) => prevSeconds % 60)
+            setHours(hours + 1)
+            
+        }
+        if (hours > 24) {
+            clearInterval(intervalId)
+            setIntervalId(null)
+            setSeconds(0)
+            setMinutes(0)
+            setHours(0)
+        }
+        
+        if (user.id_business) {
+            getBusinessName(user.id_business)
+            .then(res =>{ 
+                // console.log(res)
+                setBusinessName(res)
+                
+            })               
+        }
+        
+          
+    }, [seconds, minutes, hours, intervalId, user])
+    
     const startTimer = () => {
         setDisabled(true)
         const id = setInterval(() => {
@@ -24,89 +63,123 @@ export default function Dependent (user) {
         setIntervalId(id);
       }
     
-    const resetTimer = () => {
+    const resetTimer = async => {
         clearInterval(intervalId)
+        try {
+            if (hours) {
+                let result = user.hours_available - hours
+                addHours({ hours_available : result, email : user.email})
+                    .then(async token => {
+                    if(token){
+                        localStorage.setItem("token", token)
+                        let user = await getPayload(token)  
+                        onSetUser(user)
+                    }
+
+                }).catch(err => {
+                    console.log(err)
+            })    
+                
+            } else if (minutes) {
+                let toHours = ((user.hours_available * 60)  - minutes ) / 60
+                
+                let integer = Number(toHours.toString().split("").splice(0,2).join(""))
+                console.log(integer)
+                let decimal = Math.floor(Number(toHours.toString().split("").splice(2).join("")) * 60)
+                console.log(decimal)
+                let result = [integer, decimal]
+                
+                addHours({ hours_available : result.join("."), email : user.email})
+                    .then(async token => {
+                        if(token){
+                            localStorage.setItem("token", token)
+                            let user = await getPayload(token)  
+                            onSetUser(user)
+                        }
+
+                    })
+            }
+        } catch(err) {
+            console.log(err)
+        }
+ 
         setIntervalId(null)
         setSeconds(0)
         setMinutes(0)
         setHours(0)
         setDisabled(false)
-        if (hours) {
-            let result = user.user.hours_available - hours
-            addHours({ hours_available : result, email : user.user.email})
-                .then(res => setUpdateHours(res))
-
-        } else if (minutes) {
-            let toHours = ((user.user.hours_available * 60)  - minutes ) / 60
-
-            let integer = Number(toHours.toString().split("").splice(0,2).join(""))
-            console.log(integer)
-            let decimal = Math.floor(Number(toHours.toString().split("").splice(2).join("")) * 60)
-            console.log(decimal)
-            let result = [integer, decimal]
-
-            addHours({ hours_available : result.join("."), email : user.user.email})
-                .then(res => setUpdateHours(res))
-        } 
     }
-    useEffect(() => {
-        if (seconds === 60) {
-
-            setSeconds((prevSeconds) => prevSeconds % 60)
-            setMinutes(minutes + 1)
-     
-        }
-        if(minutes === 60 ){
-
-            setMinutes((prevSeconds) => prevSeconds % 60)
-            setHours(hours + 1)
-
-        }
-        if (hours > 24) {
-            clearInterval(intervalId)
-            setIntervalId(null)
-            setSeconds(0)
-            setMinutes(0)
-            setHours(0)
-        }
-
-      }, [seconds, minutes, hours, user, intervalId])
-    
 
     const handleChange = ({ target }) => {
         setInput({...input, [target.name] : target.value})
     }
-    const handleSubmit = (evt) => {
+
+    const handleSubmit =  (evt) => {
         evt.preventDefault()
 
-        addHours({ hours_available : input.hours_available, email : user.user.email}).then(res => {
-            setUpdateHours(res)
-        })
+        addHours({ hours_available : input.hours_available, email : user.email}) 
+            .then(async token => {
+                    if(token){
+                        localStorage.setItem("token", token)
+                        let user = await getPayload(token)  
+                        onSetUser(user)
+                    }
+
+                }).catch(err => {
+                    console.log(err)
+            })    
     }
-    return (
+    const handleDelete = () => {
+
+        deleteDependent({ email : user.email, position : user.position}) 
+            .then(async token => {
+                    if(token){
+                        localStorage.setItem("token", token)
+                        let user = await getPayload(token)  
+                        onSetUser(user)
+                    }
+
+                }).catch(err => {
+                    console.log(err)
+            })    
+    }
+        
+     return (
+        
         <div className='wrapper-profile'>
             <header>
                 <section>
                     <div>
-                        <img className="profile-pic" src="https://images.pexels.com/photos/15443094/pexels-photo-15443094.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load" alt="" />
+                        <AiOutlineUser className='icon'/>
                     </div>
                     <div>
-                        <h2>{user.user.name}</h2>
-                        <h4>{user.user.email}</h4>
+                        <h2>{user.name}</h2>
+                        <h4>{user.email}</h4>
                     </div>
                     <div>
-                        <h4 className='position-info'>{user.user.position}</h4>
+                        <h4 className='position-info'>{user.position}</h4>    
                         <h4>
-                            {updateHours.hours_available ? updateHours.hours_available + "h available" : ( user.user.hours_available === null ? "" : user.user.hours_available + "h available")}</h4>
+                          {user.hours_available && user.hours_available + "h available"}
+                        </h4>
                     </div>
                     <div>
-                        {/* business your are parte of */}
-                        {/* <button> Confirm </button> */}
+                        {user.position !== 'unemployee' ? (
+                        <>
+                            {businessName?.name && (
+                                <>
+                                    <h4>{businessName.name}</h4>
+                                </>
+                            )}
+                        </>) : null}
                     </div>
                     <div>
-                        {/* <Button variant="secondary" size="sm" active>
-                            EDIT PHOTO
-                        </Button> */}
+                     {user.position !== 'unemployee' ? (
+                        <>
+                           <Button variant="primary" size="sm" active onClick={handleDelete}>
+                            Delete
+                            </Button>
+                        </>) : null}
+                        
                     </div>
                 </section>
             </header>
@@ -115,7 +188,10 @@ export default function Dependent (user) {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Clock In</Accordion.Header>
                             <Accordion.Body className="clock-in">
-                                <h4>{updateHours.hours_available ? updateHours.hours_available + "h available" : ( user.user.hours_available === null ? "Set your availability" : user.user.hours_available + "h available")}</h4>
+                                <h4>
+                                    {user.hours_available ? user.hours_available + "h available" : "Set yor availability"}
+                                </h4>
+                                
                                 <h4>Timer: {hours !== 0 ? hours + ":" : null}{minutes !== 0 ? minutes + ":" : null}{seconds}</h4>
                                 
                                 <Button onClick={startTimer} variant="primary" size="sm" active disabled={disabled}>
@@ -134,7 +210,7 @@ export default function Dependent (user) {
                             <Form onChange={handleChange} onSubmit={handleSubmit}>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Enter your hours available per week</Form.Label>
-                                    <Form.Control type="number" name="hours_available" placeholder="Enter hours available" />
+                                    <Form.Control type="number" name="hours_available" placeholder="Enter hours available" required/>
                                 
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
@@ -143,9 +219,9 @@ export default function Dependent (user) {
                             </Form>
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Tasks user={user}/>
+                  { user.id_business && <Tasks user={user}/>}
                 </Accordion>
             </section>
-        </div>
+       </div>
     )
 }

@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import Business from "../components/Business"
 import Dependent from "../components/Dependet"
+// import { login } from "../utils/dependent"
 import { getUser } from "../utils/users_service"
 
 
-export default function ProfilePage({ user , onLogIn }) {
-    
+export default function ProfilePage({ user , onLogIn, onSetUser }) {
+
     useEffect(() => {
         onLogIn(getUser())  
     }, [])
@@ -14,11 +15,12 @@ export default function ProfilePage({ user , onLogIn }) {
         <>
         { user && 
             <>
-                { user.email ? (
+                { user.email && (
                      
-                     <Dependent user={user} key={user.id}/>
+                     <Dependent user={user} key={user.id} onSetUser={onSetUser} onLogIn={onLogIn}/>
                      
-                ) : (
+                )}  
+                {user.owner_email && (
          
                     <Business user={user} key={user.id}/>
 

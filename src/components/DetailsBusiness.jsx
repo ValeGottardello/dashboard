@@ -1,17 +1,17 @@
 import { useEffect } from "react"
 import '../css/Profile.css'
+import { AiOutlineUser } from "react-icons/ai";
 
-export default function DetailsBusiness (user) {
-    console.log(user.user)
+export default function DetailsBusiness ({user}) {
     useEffect(() => {}, [user])
     return (
         <section className="business-details">
             <div>
-                <img className="profile-pic" src="https://images.pexels.com/photos/15443094/pexels-photo-15443094.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load" alt="" />
+                <AiOutlineUser className='icon'/>
             </div>
             <div>
-                <h2>{user.user.name}</h2>
-                <h4>{user.user.owner_email}</h4>
+                <h2>{user.name}</h2>
+                <h4>{user.owner_email}</h4>
             </div>
             <div>
                 {/* business your are parte of */}

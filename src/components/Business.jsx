@@ -7,8 +7,9 @@ import { addNewDependent, deleteDependent } from "../utils/owner";
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import DetailsBusiness from "./DetailsBusiness";
-import '../css/Profile.css'
-
+import '../css/Profile.css'  
+import { AiOutlineUser,AiOutlineHourglass,AiOutlineMail } from "react-icons/ai";
+import { getPayload } from "../utils/users_service";
 export default function Business ({ user }) {
 
     const [dependents, setDependents] = useState([])
@@ -19,7 +20,13 @@ export default function Business ({ user }) {
     const [show, setShow] = useState(true)
 
     useEffect(() => {
-        getDependents(user.id).then(dependents => setDependents(dependents))
+        getDependents(user.id).then(res => {
+            if (res.error) {
+                console.log(res.error)
+            } else {
+
+                setDependents(res)
+            }})
     }, [user])
 
 
@@ -48,12 +55,22 @@ export default function Business ({ user }) {
     const handleSubmitDelete = (evt) => {
         evt.preventDefault()
      
-        deleteDependent(memberDelete).then(res => {
-            const updDependents = dependents.filter(dependent => dependent.id !== res.id)
-            setDependents(updDependents)
-            setShow(true)
-            setMessage("team member removed")
-        })
+        deleteDependent(memberDelete)
+            .then(async token => {
+            if(token){
+                localStorage.setItem("token", token)
+                let oldDependent = await getPayload(token)  
+
+                const updDependents = dependents.filter(dependent => dependent.id !== oldDependent.id)
+                console.log(updDependents)
+                setDependents(updDependents)
+
+            }
+        }).catch(err => {
+            console.log(err)
+        })    
+        setShow(true)
+        setMessage("team member removed")
     }
     const handleChangeUpdate = ({ target }) => {
         setNewPosition({...newPosition, [target.name] : target.value})
@@ -90,18 +107,18 @@ export default function Business ({ user }) {
             <section>
                 <h3>Team members</h3>
                 <div className="card-members-wrapper">
-                    {dependents?.map(eachDep => (                 
-                        <Card style={{ width: '18rem' }} key={eachDep.id}>
-                            <Card.Body>
-                                <Card.Title><h3 >{eachDep.name}</h3></Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{eachDep.position}</Card.Subtitle>
-                                <ul>
-                                        <li>{eachDep.email}</li>
-                                        <li>{eachDep.hours_available !== null ? + eachDep.hours_available + "h available" : "No specified hours"}</li>
-                                </ul>
-                            </Card.Body>
-                        </Card>
-                    ))}
+                        {dependents?.map(eachDep => (                 
+                            <Card style={{ width: '18rem' }} key={eachDep.id}>
+                                <Card.Body>
+                                    <Card.Title><h3><AiOutlineUser/> {eachDep.name}</h3></Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{eachDep.position}</Card.Subtitle>
+                                    <ul>
+                                            <li><AiOutlineMail/> {eachDep.email}</li>
+                                            <li><AiOutlineHourglass/> {eachDep.hours_available !== null ? + eachDep.hours_available + "h available" : "No specified hours"}</li>
+                                    </ul>
+                                </Card.Body>
+                            </Card>
+                        ))}
                 </div>
             </section>
             <section>
@@ -140,8 +157,11 @@ export default function Business ({ user }) {
                                 <Form.Control type="email" name="email" placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicName">
-                                <Form.Label>Role</Form.Label>
-                                <Form.Control type="text" name="position" placeholder="Enter role" />
+                                <Form.Select aria-label="Assign to:" name="position" placeholder="Enter role" >
+                                    <option> Assign to: </option>
+                                    <option>employee</option>
+                                    <option>manager</option>
+                                </Form.Select>
                             </Form.Group>
                             <Button variant="primary" type="submit">
                                 Submit
@@ -177,7 +197,7 @@ export default function Business ({ user }) {
                 </Accordion>
                 {message && show ? (
                 <>
-                <Alert show={show}>
+                <Alert show={show} variant={"dark"}>
                     <Alert.Heading>{message}</Alert.Heading>
                     <div className="d-flex justify-content-end">
                     <Button onClick={() => setShow(false)} variant="outline-success">

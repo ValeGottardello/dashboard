@@ -21,12 +21,16 @@ export function Tasks ({ user }) {
 
     useEffect(() => {
 
-        if (user.user.id_business) {
-            getDependents(user.user.id_business).then(res => setDependents([...res]))
+        if (user.id_business) {
+            getDependents(user.id_business).then(res => {
+                if(res.length > 0){
+                    setDependents([...res])    
+                }  
+            })
 
               
 
-            getTasks(user.user.id)
+            getTasks(user.id)
                 .then(res => {
                     if(res.error) {
                         console.log(res)
@@ -38,8 +42,8 @@ export function Tasks ({ user }) {
                 console.log(err)
             })}
 
-        if(user.user.position === "manager"){
-            getAllTasks(user.user.id_business).then(res => setAllTasks(res))
+        if(user.position === "manager"){
+            getAllTasks(user.id_business).then(res => setAllTasks(res))
         }
 
       
@@ -58,9 +62,9 @@ export function Tasks ({ user }) {
         let dataBody = {
             task_name : input.name,
             to_do : input.to_do,
-            id_manager : user.user.id,
+            id_manager : user.id,
             id_employee : input.id_employee,
-            id_business : user.user.id_business,
+            id_business : user.id_business,
             name_employee: nameEmployee[0].name
         }
 
@@ -134,7 +138,7 @@ export function Tasks ({ user }) {
             </Accordion.Body>
         </Accordion.Item>
 
-        { user.user.position === "manager" ? (
+        { user.position === "manager" ? (
         <>
             <Accordion.Item eventKey="4">
                 <Accordion.Header>

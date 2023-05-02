@@ -1,4 +1,4 @@
-function getPayload(token) {
+export function getPayload(token) {
   return JSON.parse(window.atob(token.split(".")[1]))
 }
 
@@ -22,7 +22,8 @@ export function getUser() {
   const token = getToken()
   
   if (token) {
-    let user = getPayload(token)
+    let user = getPayload(token)  
+    console.log(user)
     delete user.password_digest
     return user
   } else {

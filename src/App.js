@@ -14,8 +14,10 @@ import NavBar from './components/NavBar'
 function App() {
 
   const [user, setUser] = useState(getUser())
+ 
 
   const login = data => {
+    console.log(data)
     setUser(data)
   }
 
@@ -33,7 +35,7 @@ function App() {
         <Route path="/signup/dependent" element={<SignUpDependentPage onLogIn={login} />}/>
         <Route path="/login/owner" element={<LogInBusinessPage onLogIn={login} />}/>
         <Route path="/login/dependent" element={<LogInDependentPage onLogIn={login} />}/>
-        <Route path="/profile" element={<ProfilePage user={user} onLogIn={login}/>}/>
+        <Route path="/profile" element={<ProfilePage user={user} onLogIn={login} onSetUser={setUser}/>}/>
         <Route path="/roster"/>
 
         {/* <Route/> */}

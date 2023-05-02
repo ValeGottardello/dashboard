@@ -27,7 +27,9 @@ export default function NavBar ({user, onLogOut}) {
                 <>
                     <Offcanvas.Header closeButton>
                         <Link
-                        to="/profile">Hello {user.email ? user.email : user.owner_email}</Link>
+                        to="/profile">
+                            Hello {user.email ? user.email : user.owner_email}
+                            </Link>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
