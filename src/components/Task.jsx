@@ -182,7 +182,17 @@ export function Tasks ({ user }) {
                                     <Form.Label className='label-task'
                                     >{task.task_name}</Form.Label>
                                     <Form.Text className="text-muted">
-                                        {!task.done ? `to do - assigned to ${task.name_employee}` : `done by ${task.name_employee}` }
+                                        {!task.done ? (
+                                            <>
+                                            
+                                            <p className='assigned-task'><span className='to-do'>TO DO </span> assigned to {task.name_employee}</p>
+                                            </>
+                                            ): (
+                                            <>
+                                            
+                                            <p className='assigned-task'><span className='done'>done </span> by {task.name_employee}</p>
+                                            </>
+                                            )}
                                     </Form.Text>
                                 </div>
                                 <Button variant="primary" value={task.id} onClick={handleDeleteTask}>
