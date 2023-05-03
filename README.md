@@ -5,6 +5,7 @@
 ## Idea 💡
 
 The idea was inspired by past work experiences which motivated me to think about what is the best way to organize a team work space, improve efficiency, productivity and a host of other benefits.
+Look up the wireframes [here] (https://whimsical.com/wireframes-org-app-W4Gnk7pBHdG9m8jy1z6M5g)
 
 ## Planning 📋
 
