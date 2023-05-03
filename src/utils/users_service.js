@@ -23,7 +23,6 @@ export function getUser() {
   
   if (token) {
     let user = getPayload(token)  
-    console.log(user)
     delete user.password_digest
     return user
   } else {

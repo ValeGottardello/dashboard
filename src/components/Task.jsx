@@ -101,8 +101,8 @@ export function Tasks ({ user }) {
     const handleDeleteTask = ({target}) => {
         // console.log(target.value)
         deleteTask(target.value).then(res => {
-            console.log(res)
-            console.log(res)
+  
+            // console.log(res)
             const updatedTasks = allTasks.filter(task => task.id !== res.id)
             setAllTasks(updatedTasks)
             setMessage("Task deleted")

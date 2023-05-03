@@ -17,7 +17,6 @@ function App() {
 
 
   const login = data => {
-    console.log(data)
     setUser(data)
   }
 
