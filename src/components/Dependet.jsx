@@ -163,23 +163,21 @@ export default function Dependent ({user, onSetUser}) {
                         </h4>
                     </div>
                     <div>
-                        {user.position !== 'unemployee' ? (
+                        {user.position !== 'unemployee' || user.position === null ? (
                         <>
                             {businessName?.name && (
                                 <>
+                                <div>
                                     <h4>{businessName.name}</h4>
+                                </div>
+                                <div>
+                                    <Button variant="primary" size="sm" active onClick={handleDelete}>
+                                        Delete
+                                    </Button>
+                                </div>
                                 </>
                             )}
                         </>) : null}
-                    </div>
-                    <div>
-                     {user.position !== 'unemployee' ? (
-                        <>
-                           <Button variant="primary" size="sm" active onClick={handleDelete}>
-                            Delete
-                            </Button>
-                        </>) : null}
-                        
                     </div>
                 </section>
             </header>
