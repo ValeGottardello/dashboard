@@ -38,7 +38,6 @@ export default function Business ({ user }) {
         evt.preventDefault()
 
         addNewDependent({id: user.id, email : newDependent.email, position: newDependent.position}).then(res => {
-            console.log(res)
     
             setDependents([...dependents, res])
             setShow(true)

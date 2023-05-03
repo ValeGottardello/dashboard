@@ -1,6 +1,6 @@
 # FIXUP 
 
-[Try here](https://fixup.vercel.app/)
+[Try here](https://fixup-git-main-valegottardello.vercel.app/)
 This is a full-stack application build in with Javascript, React in the client side, and Express, Node.js and Postgresql in the server side. 
 
 ## Idea 💡
