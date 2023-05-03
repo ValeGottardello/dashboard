@@ -1,6 +1,6 @@
-# Dashbord app
+# FIXUP 
 
-[Try here](...)
+[Try here](https://fixup.vercel.app/)
 
 ## Idea
 
@@ -8,9 +8,34 @@ The idea was inspired by past work experiences which motivated me to think about
 
 ## Planning
 
-## Tech Stack
+The app was create to users can create accounts as a business or as employees, and create an orderly and clean workspace in which each one, according to their account and their current position, can interact in different ways,
+as well as business accounts can:
+- create an account
+- add dependents
+- Update your role or position in the business
+- remove employees from your business
+- (ideally build the weekly schedule schedule)
+On the other hand, the dependents are divided into managers and employees,
+employees can:
+- determine your time availability
+- clock in and clock out, which is deducted from your weekly available hours
+- view your assigned tasks
+- quit your job and leave the business of which you are a part
+- (ideally see the weekly schedule schedule)
+and finally the managers can:
+- do everything an employee does, plus:
+- Assign tasks to the employees of the business of which it is part
+- See all assigned tasks, to whom they have been assigned and their status, done or not.
+-(ideally build the weekly schedule schedule)
 
-## Libraries Used
+## Tech Stack & Libraries Used
+
+- React (react-create-app)
+- React Bootstrap
+- Javascript
+- Css
+- NPM
+
 
 
 
