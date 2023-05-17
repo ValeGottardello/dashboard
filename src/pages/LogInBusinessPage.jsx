@@ -10,7 +10,7 @@ import { getUser } from "../utils/users_service";
 export default function LogInBusinessPage({ onLogIn }) {
 
     const [input, setInput] = useState({})
-    const [error, setError] = useState({}) //for now hard coding then add function to check requirements for password
+    const [error, setError] = useState({}) 
     const navigate = useNavigate()
     const handleChange = ({ target }) => {
         setInput({ ...input, [ target.name ] : target.value})
@@ -46,19 +46,18 @@ export default function LogInBusinessPage({ onLogIn }) {
                         We'll never share your email with anyone else.
                         </Form.Text>
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" />
                     </Form.Group>
-                    {error?.message && (
-                        <Form.Text className="text-muted">
-                            {error.message}
-                        </Form.Text>
-                    )}
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
+                    {error?.message && (
+                        <Form.Text className="text-muted error">
+                            {error.response.data.message}
+                        </Form.Text>
+                    )}
                 </Form>
              </div>
              <div className="right">

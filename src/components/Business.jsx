@@ -18,13 +18,13 @@ export default function Business ({ user }) {
     const [newPosition, setNewPosition] = useState({})
     const [message, setMessage] = useState(null)
     const [show, setShow] = useState(true)
+    const [error, setError] = useState({})
 
     useEffect(() => {
         getDependents(user.id).then(res => {
             if (res.error) {
-                console.log(res.error)
+                setError(res.error)
             } else {
-
                 setDependents(res)
             }})
     }, [user])
@@ -37,12 +37,12 @@ export default function Business ({ user }) {
 
         evt.preventDefault()
 
-        addNewDependent({id: user.id, email : newDependent.email, position: newDependent.position}).then(res => {
-    
-            setDependents([...dependents, res])
-            setShow(true)
-            setMessage("new team member added")
+        addNewDependent({ id: user.id, email : newDependent.email, position: newDependent.position }).then(res => {
+                setDependents([...dependents, res])
+                setShow(true)
+                setMessage("new team member added")
         })
+        .catch(error => setError(error))
 
     }
 
@@ -90,7 +90,7 @@ export default function Business ({ user }) {
                 }
                 return dependent
             })
-            // console.log(updDependents)
+       
             setDependents(updDependents)
             setShow(true)
             setMessage("team member position updated")
@@ -128,11 +128,11 @@ export default function Business ({ user }) {
                         <Form onChange={handleChangeAdd} onSubmit={handleSubmitAdd}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Team member's email address</Form.Label>
-                                <Form.Control type="email" name="email" placeholder="Enter email" />
+                                <Form.Control type="email" name="email" placeholder="email@hotmail.com" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicName">
-                                <Form.Select aria-label="Assign to:" name="position" placeholder="Enter role" >
-                                    <option> Assign to: </option>
+                                <Form.Select aria-label="Position:" name="position" >
+                                    <option> Position: </option>
                                     <option>employee</option>
                                     <option>manager</option>
                                 </Form.Select>
@@ -140,6 +140,11 @@ export default function Business ({ user }) {
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
+                            {error?.message && (
+                                <Form.Text className="text-muted error">
+                                    {error.response.data.message}
+                                </Form.Text>
+                            )}
                         </Form>
                         </Accordion.Body>
                         </Accordion.Item>
@@ -153,11 +158,16 @@ export default function Business ({ user }) {
                         <Form onChange={handleChangeDelete} onSubmit={handleSubmitDelete}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Team member's email address</Form.Label>
-                                <Form.Control type="email" name="email" placeholder="Enter email" />
+                                <Form.Select aria-label="Email:" name="email" type="email"> 
+                                    <option>email@hotmail.com</option>
+                                    { dependents?.map(dependent => (
+                                        <option>{dependent.email}</option>
+                                    ))}
+                                </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicName">
-                                <Form.Select aria-label="Assign to:" name="position" placeholder="Enter role" >
-                                    <option> Assign to: </option>
+                                <Form.Select aria-label="Position:" name="position"  >
+                                    <option> Position: </option>
                                     <option>employee</option>
                                     <option>manager</option>
                                 </Form.Select>
@@ -178,11 +188,16 @@ export default function Business ({ user }) {
                         <Form onChange={handleChangeUpdate} onSubmit={handleSubmitUpdate}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Team member's email address</Form.Label>
-                                <Form.Control type="email" name="email" placeholder="Enter email" />
+                                <Form.Select aria-label="Email:" name="email" type="email"> 
+                                    <option>email@hotmail.com</option>
+                                    { dependents?.map(dependent => (
+                                        <option>{dependent.email}</option>
+                                    ))}
+                                </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicName">
-                                <Form.Select aria-label="Assign to:" name="position" placeholder="Enter role" >
-                                    <option> Assign to: </option>
+                                <Form.Select aria-label="Position:" name="position" >
+                                    <option> Position:</option>
                                     <option>employee</option>
                                     <option>manager</option>
                                 </Form.Select>

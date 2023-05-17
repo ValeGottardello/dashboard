@@ -20,7 +20,6 @@ export default function Dependent ({user, onSetUser}) {
     const [input, setInput] = useState({})
     const [businessName, setBusinessName] = useState({})
 
-
     useEffect(() => {
         if (seconds === 60) {
             
@@ -44,11 +43,9 @@ export default function Dependent ({user, onSetUser}) {
         
         if (user.id_business) {
             getBusinessName(user.id_business)
-            .then(res =>{ 
-                // console.log(res)
-                setBusinessName(res)
-                
-            })               
+                .then(res =>{ 
+                    setBusinessName(res)
+                })      
         }
         
           
@@ -198,8 +195,6 @@ export default function Dependent ({user, onSetUser}) {
                                 <Button onClick={resetTimer} variant="primary" size="sm" active>
                                             Clock Off
                                 </Button>  
-                            
-                                {/* <Link to="/roster">See your roster</Link> */}
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
