@@ -10,6 +10,7 @@ import DetailsBusiness from "./DetailsBusiness";
 import '../css/Profile.css'  
 import { AiOutlineUser,AiOutlineHourglass,AiOutlineMail } from "react-icons/ai";
 import { getPayload } from "../utils/users_service";
+
 export default function Business ({ user }) {
 
     const [dependents, setDependents] = useState([])
@@ -41,6 +42,7 @@ export default function Business ({ user }) {
                 setDependents([...dependents, res])
                 setShow(true)
                 setMessage("new team member added")
+                setError({})
         })
         .catch(error => setError(error))
 
@@ -161,7 +163,7 @@ export default function Business ({ user }) {
                                 <Form.Select aria-label="Email:" name="email" type="email"> 
                                     <option>email@hotmail.com</option>
                                     { dependents?.map(dependent => (
-                                        <option>{dependent.email}</option>
+                                        <option key={dependent.id}>{dependent.email}</option>
                                     ))}
                                 </Form.Select>
                             </Form.Group>
@@ -191,7 +193,7 @@ export default function Business ({ user }) {
                                 <Form.Select aria-label="Email:" name="email" type="email"> 
                                     <option>email@hotmail.com</option>
                                     { dependents?.map(dependent => (
-                                        <option>{dependent.email}</option>
+                                        <option key={dependent.id}>{dependent.email}</option>
                                     ))}
                                 </Form.Select>
                             </Form.Group>

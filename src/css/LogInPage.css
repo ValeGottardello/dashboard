@@ -37,3 +37,8 @@ form .error{
     margin: 0 15px;
     color: rgb(235, 19, 19)!important
 }
+form .status {
+    text-transform: uppercase;
+    margin: 0 15px;
+    color: black;
+}

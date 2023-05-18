@@ -81,9 +81,9 @@ export default function Dependent ({user, onSetUser}) {
                 let toHours = ((user.hours_available * 60)  - minutes ) / 60
                 
                 let integer = Number(toHours.toString().split("").splice(0,2).join(""))
-                // console.log(integer)
+         
                 let decimal = Math.floor(Number(toHours.toString().split("").splice(2).join("")) * 60)
-                // console.log(decimal)
+        
                 let result = [integer, decimal]
                 
                 addHours({ hours_available : result.join("."), email : user.email})

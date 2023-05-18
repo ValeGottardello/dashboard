@@ -13,7 +13,6 @@ export function Tasks ({ user }) {
 
     const [tasks, setTasks] = useState([])
     const [allTasks, setAllTasks] = useState([])
-    // const [error, setError] = useState({})
     const [input, setInput] = useState({})
     const [dependent, setDependents] = useState([])
     const [message, setMessage] = useState(null)
@@ -28,13 +27,10 @@ export function Tasks ({ user }) {
                 }  
             })
 
-              
-
             getTasks(user.id)
                 .then(res => {
                     if(res.error) {
                         console.log(res)
-                        // setError(res)
                     } else {
                         setTasks([...res])
                     }
@@ -99,10 +95,9 @@ export function Tasks ({ user }) {
     }
 
     const handleDeleteTask = ({target}) => {
-        // console.log(target.value)
+
         deleteTask(target.value).then(res => {
-  
-            // console.log(res)
+
             const updatedTasks = allTasks.filter(task => task.id !== res.id)
             setAllTasks(updatedTasks)
             setMessage("Task deleted")

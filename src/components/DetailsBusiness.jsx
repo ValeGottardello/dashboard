@@ -13,15 +13,6 @@ export default function DetailsBusiness ({user}) {
                 <h2>{user.name}</h2>
                 <h4>{user.owner_email}</h4>
             </div>
-            <div>
-                {/* business your are parte of */}
-                {/* <button> Confirm </button> */}
-            </div>
-            <div>
-                {/* <Button variant="secondary" size="sm" active>
-                    EDIT PHOTO
-                </Button> */}
-            </div>
         </section>
     )
 }
