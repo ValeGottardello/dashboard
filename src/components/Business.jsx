@@ -50,7 +50,7 @@ export default function Business ({ user }) {
 
     const handleChangeDelete = ({ target }) => {
         setMemberDelete({...memberDelete, [target.name] : target.value})
-        console.log(memberDelete)
+
     }
 
     const handleSubmitDelete = (evt) => {
@@ -63,7 +63,7 @@ export default function Business ({ user }) {
                 let oldDependent = await getPayload(token)  
 
                 const updDependents = dependents.filter(dependent => dependent.id !== oldDependent.id)
-                console.log(updDependents)
+              
                 setDependents(updDependents)
 
             }
