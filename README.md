@@ -3,6 +3,9 @@
 [Try here](https://fixup.vercel.app/)
 This is a full-stack application build in with Javascript, React in the client side, and Express, Node.js and Postgresql in the server side. 
 
+
+
+
 ## Idea 💡
 
 The idea was inspired by past work experiences which motivated me to think about what is the best way to organize a team work space, improve efficiency, productivity and a host of other benefits.
